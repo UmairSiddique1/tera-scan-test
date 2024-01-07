@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Terascan</string>
+    <string name="recent_files">Recent Files</string>
+    <string name="view_all"><u>View All</u></string>
+    <string name="home">Home</string>
+    <string name="docs">Docs</string>
+    <string name="tools">Tools</string>
+    <string name="settings">Settings</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="add_first_document">Add your first document</string>
+    <string name="pro">Pro</string>
+
+    <string name="file_name">File Name</string>
+
+    <string name="allow_storage_permission">Allow Storage Permission</string>
+    <string name="access_your_files">To proceed with the previous action Terascan will need to access your files</string>
+    <string name="do_not_allow">Don\'t Allow</string>
+    <string name="allow">Allow</string>
+    <string name="all_docs">All Docs</string>
+    <string name="data_not_found">Data Not Found!</string>
+</resources>
