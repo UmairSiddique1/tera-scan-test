@@ -84,7 +84,7 @@ class MainActivity : AppCompatActivity() {
 
         //REQUEST PERMISSIONS FOR ANDROID 11 AND ABOVE
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && !Environment.isExternalStorageManager()) {
-            PermissionDialog.alertDialog(this, onAllowAction = {
+            PermissionDialog.permissionDialog(this, onAllowAction = {
                 val intent = Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION)
                 val uri = Uri.fromParts("package", packageName, null)
                 intent.setData(uri)

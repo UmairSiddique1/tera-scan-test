@@ -11,12 +11,19 @@ import com.example.terascantest.R
 
 object PermissionDialog {
     @SuppressLint("MissingInflatedId")
-    fun alertDialog(activity: Activity,onAllowAction: () -> Unit) {
+    fun permissionDialog(activity: Activity, onAllowAction: () -> Unit) {
         val builder = AlertDialog.Builder(activity)
         val viewGroup = activity.findViewById<ViewGroup>(android.R.id.content)
         val dialogView = LayoutInflater.from(activity).inflate(R.layout.layout_permission_dialog, viewGroup, false)
         val tvDoNotAllow=dialogView.findViewById<TextView>(R.id.tv_do_not_allow)
         val tvAllow=dialogView.findViewById<TextView>(R.id.tv_allow)
+        val tvTitle=dialogView.findViewById<TextView>(R.id.textview_title)
+        val tvDesc=dialogView.findViewById<TextView>(R.id.textview_desc)
+
+        tvDoNotAllow.setText(R.string.do_not_allow)
+        tvAllow.setText(R.string.allow)
+        tvTitle.setText(R.string.allow_storage_permission)
+        tvDesc.setText(R.string.access_your_files)
 
         builder.setView(dialogView)
         val alertDialog = builder.create()

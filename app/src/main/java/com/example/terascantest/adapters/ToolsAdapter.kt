@@ -45,7 +45,7 @@ class ToolsAdapter(val context: Context, private val list:List<ToolsItemsModel>)
 
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
-        viewHolder.textView.text = list[position].toolName
+        viewHolder.textView.text = list[position].name
         viewHolder.imageView.setImageResource(list[position].iconResId)
 
         if(viewHolder.textView.text=="Edit PDF"){

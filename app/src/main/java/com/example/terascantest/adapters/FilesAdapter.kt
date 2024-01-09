@@ -29,7 +29,8 @@ class FilesAdapter(val context: Context, private var list:List<FilesDataModel>, 
 holder.fileImg.setImageResource(item.iconRes)
 
         holder.fileMenuIcon.setOnClickListener{
-val bottomSheet= BottomSheetDialog()
+val bottomSheet= BottomSheetDialog(item.fileUri)
+
             bottomSheet.show((context as FragmentActivity).supportFragmentManager,"Bottom Sheet")
         }
     }
@@ -67,7 +68,6 @@ val bottomSheet= BottomSheetDialog()
            date=view.findViewById(R.id.tv_fileDate)
             fileImg=view.findViewById(R.id.iv_filesImg)
            fileMenuIcon=view.findViewById(R.id.iv_fileMenuIcon)
-
         }
     }
 

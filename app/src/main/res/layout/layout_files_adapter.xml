@@ -36,8 +36,8 @@
             android:textSize="12sp" />
     </LinearLayout>
 <ImageView
-    android:layout_width="16dp"
-    android:layout_height="16dp"
+    android:layout_width="20dp"
+    android:layout_height="20dp"
     android:src="@drawable/ic_menu"
     android:id="@+id/iv_fileMenuIcon"
    android:layout_alignParentEnd="true"
