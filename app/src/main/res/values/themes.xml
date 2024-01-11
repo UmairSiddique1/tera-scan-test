@@ -25,4 +25,13 @@
         <item name="itemTextColor">#858585</item>
         <!-- Add other custom attributes as needed -->
     </style>
+
+    <style name="PinEditText" parent="Widget.AppCompat.EditText">
+        <item name="android:layout_width">18dp</item>
+        <item name="android:layout_height">18dp</item>
+        <item name="android:inputType">numberPassword</item>
+        <item name="android:maxLength">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/bg_pin</item>
+    </style>
 </resources>

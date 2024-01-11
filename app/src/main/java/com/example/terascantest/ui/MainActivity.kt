@@ -171,4 +171,7 @@ class MainActivity : AppCompatActivity() {
     fun hideBottomNavigationView() {
         binding.bottomNavLinearlayout.visibility = View.GONE
     }
+    fun hideTopBar(){
+        binding.llTopbar.visibility=View.GONE
+    }
 }

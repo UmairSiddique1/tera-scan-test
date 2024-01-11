@@ -35,10 +35,7 @@ class ViewAllFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentViewAllBinding.inflate(inflater, container, false)
         binding.icBackArrow.setOnClickListener {
-            context?.startActivity(
-                Intent(
-                    context, MainActivity::class.java
-                )
+            context?.startActivity(Intent(context, MainActivity::class.java)
             )
         }
         filesViewModel = ViewModelProvider(this)[FilesViewModel::class.java]

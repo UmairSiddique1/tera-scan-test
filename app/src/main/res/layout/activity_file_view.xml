@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    android:backgroundTint="@color/white"
+    android:background="@color/white"
+    tools:context=".ui.FileViewActivity">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="58dp"
+    android:id="@+id/rl_topbar">
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_back_arrow"
+        android:layout_centerVertical="true"
+        android:id="@+id/iv_back"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/file_name"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="16dp"/>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ic_lock"
+        android:src="@drawable/ic_lock"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"/>
+</RelativeLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/fragmentContainer"
+        android:layout_below="@+id/rl_topbar"/>
+</RelativeLayout>

@@ -9,14 +9,18 @@ import androidx.fragment.app.FragmentTransaction
 import com.example.terascantest.R
 
 object Utils {
-    fun loadFragment(activity: FragmentActivity,fragment: Fragment) {
-        val fragmentManager: FragmentManager = activity.supportFragmentManager
-        val transaction: FragmentTransaction = fragmentManager.beginTransaction()
+    fun loadFragment(activity: FragmentActivity?, fragment: Fragment) {
+        activity?.let {
+            val fragmentManager: FragmentManager = it.supportFragmentManager
+            val transaction: FragmentTransaction = fragmentManager.beginTransaction()
 
-        // Replace the current fragment with the new one
-        transaction.replace(R.id.fragmentContainer, fragment)
+            // Replace the current fragment with the new one
+            transaction.replace(R.id.fragmentContainer, fragment)
 
-        // Commit the transaction
-        transaction.commit()
+            // Commit the transaction
+            transaction.commit()
+        } ?: run {
+            // Handle the case where the activity is null (optional, based on your requirements)
+        }
     }
 }

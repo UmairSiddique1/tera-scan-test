@@ -7,53 +7,14 @@
     android:layout_marginLeft="16dp"
     tools:context=".ui.HomeFragment">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="12dp"
-        android:id="@+id/ll_topbar"
-        android:gravity="center">
-        <!-- Text View on the Left -->
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/app_name"
-            android:textColor="#0D0D0D"
-            android:textSize="22sp"
-            android:fontFamily="@font/roboto_bold"
-            android:textStyle="bold"/>
 
-        <!-- Icons on the Right -->
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_scan"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"/>
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_crown"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"/>
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_search"
-            android:layout_marginStart="16dp"
-   />
-    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/rv_tools"
         android:layout_marginTop="16dp"
-        android:layout_below="@id/ll_topbar"/>
+      />
 
 
         <RelativeLayout

@@ -27,4 +27,9 @@
     <string name="yes">Yes</string>
     <string name="move_to">Move To</string>
     <string name="create_new_folder">Create New Folder</string>
+    <string name="create_name">Create Pin</string>
+    <string name="pin_desc">One pin for all files. The pin is used within the app to lock and export file. Set pin in the shared and save screen.</string>
+    <string name="set_security_questions">Set Security Questions</string>
+
+    <string name="enter_pin">Enter Pin</string>
 </resources>

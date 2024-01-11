@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.EnterPinFragment">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+       android:id="@+id/rl_topbar">
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_back_arrow"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="16dp"/>
+    </RelativeLayout>
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/rl_topbar"
+    android:text="@string/enter_pin"
+    android:textColor="@color/black"
+    android:fontFamily="@font/roboto_bold"
+    android:textSize="22sp"
+    android:layout_marginTop="24dp"
+    android:layout_centerHorizontal="true"
+    android:id="@+id/tv_enter_pin"/>
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="horizontal"-->
+<!--        android:id="@+id/ll_pin"-->
+<!--        android:layout_below="@id/tv_enter_pin"-->
+<!--        android:layout_centerHorizontal="true"-->
+<!--        android:layout_marginTop="40dp">-->
+
+<!--        <EditText-->
+<!--            android:id="@+id/pinDigit1"-->
+<!--            style="@style/PinEditText"-->
+<!--            android:cursorVisible="false"-->
+<!--            android:textColor="@color/black"-->
+<!--            android:inputType="numberPassword"-->
+<!--            android:layout_marginEnd="24dp"/>-->
+
+<!--        <EditText-->
+<!--            android:id="@+id/pinDigit2"-->
+<!--            style="@style/PinEditText"-->
+<!--            android:cursorVisible="false"-->
+<!--            android:textColor="@color/black"-->
+<!--            android:inputType="numberPassword"-->
+<!--            android:layout_marginEnd="24dp"/>-->
+
+<!--        <EditText-->
+<!--            android:id="@+id/pinDigit3"-->
+<!--            style="@style/PinEditText"-->
+<!--            android:textColor="@color/black"-->
+<!--            android:cursorVisible="false"-->
+<!--            android:inputType="numberPassword"-->
+<!--            android:layout_marginEnd="24dp"/>-->
+
+<!--        <EditText-->
+<!--            android:id="@+id/pinDigit4"-->
+<!--            style="@style/PinEditText"-->
+<!--            android:textColor="@color/black"-->
+<!--            android:cursorVisible="false"-->
+<!--            />-->
+<!--    </LinearLayout>-->
+ <com.chaos.view.PinView
+     android:layout_width="wrap_content"
+     android:id="@+id/pin"
+     android:layout_height="wrap_content"
+     app:itemHeight="18dp"
+     app:itemWidth="18dp"
+     android:cursorVisible="false"
+    app:itemSpacing="24dp"
+     android:layout_marginTop="40dp"
+     android:itemBackground="@drawable/bg_pin"
+     app:viewType="none"
+     android:layout_below="@id/tv_enter_pin"
+android:inputType="numberPassword"
+     android:focusable="true"
+     android:focusableInTouchMode="true"
+     android:layout_centerInParent="true"/>
+</RelativeLayout>
