@@ -6,13 +6,11 @@
     android:layout_marginStart="16dp"
     android:layout_marginEnd="16dp"
     tools:context=".ui.SecurityQuestionsFragment">
-<!--    <LinearLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:gravity="center_vertical">-->
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="58dp">
+        android:layout_height="58dp"
+        android:id="@+id/rl_topbar">
         <ImageView
             android:layout_width="24dp"
             android:layout_height="24dp"
@@ -35,7 +33,20 @@
             android:layout_alignParentEnd="true"/>
     </RelativeLayout>
 
-<!--    </LinearLayout>-->
-
+<androidx.appcompat.widget.AppCompatSpinner
+    android:layout_width="match_parent"
+    android:layout_height="24dp"
+    android:id="@+id/spinner"
+    android:background="@color/white"
+    android:layout_below="@id/rl_topbar"
+    android:layout_marginTop="32dp" />
+<EditText
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/et_edittext"
+    android:layout_below="@id/spinner"
+    android:layout_marginTop="18dp"
+    android:hint="@string/answer"
+    />
 
 </RelativeLayout>

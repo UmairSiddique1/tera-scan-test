@@ -27,47 +27,17 @@
     android:layout_marginTop="24dp"
     android:layout_centerHorizontal="true"
     android:id="@+id/tv_enter_pin"/>
-
-<!--    <LinearLayout-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:orientation="horizontal"-->
-<!--        android:id="@+id/ll_pin"-->
-<!--        android:layout_below="@id/tv_enter_pin"-->
-<!--        android:layout_centerHorizontal="true"-->
-<!--        android:layout_marginTop="40dp">-->
-
-<!--        <EditText-->
-<!--            android:id="@+id/pinDigit1"-->
-<!--            style="@style/PinEditText"-->
-<!--            android:cursorVisible="false"-->
-<!--            android:textColor="@color/black"-->
-<!--            android:inputType="numberPassword"-->
-<!--            android:layout_marginEnd="24dp"/>-->
-
-<!--        <EditText-->
-<!--            android:id="@+id/pinDigit2"-->
-<!--            style="@style/PinEditText"-->
-<!--            android:cursorVisible="false"-->
-<!--            android:textColor="@color/black"-->
-<!--            android:inputType="numberPassword"-->
-<!--            android:layout_marginEnd="24dp"/>-->
-
-<!--        <EditText-->
-<!--            android:id="@+id/pinDigit3"-->
-<!--            style="@style/PinEditText"-->
-<!--            android:textColor="@color/black"-->
-<!--            android:cursorVisible="false"-->
-<!--            android:inputType="numberPassword"-->
-<!--            android:layout_marginEnd="24dp"/>-->
-
-<!--        <EditText-->
-<!--            android:id="@+id/pinDigit4"-->
-<!--            style="@style/PinEditText"-->
-<!--            android:textColor="@color/black"-->
-<!--            android:cursorVisible="false"-->
-<!--            />-->
-<!--    </LinearLayout>-->
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/incorrect_pin"
+    android:id="@+id/tv_incorrect_pin"
+    android:textColor="#CA2626"
+    android:visibility="gone"
+    android:layout_below="@id/tv_enter_pin"
+    android:layout_centerHorizontal="true"
+    android:layout_marginTop="6dp"
+    android:layout_marginBottom="18dp"/>
  <com.chaos.view.PinView
      android:layout_width="wrap_content"
      android:id="@+id/pin"
@@ -84,4 +54,15 @@ android:inputType="numberPassword"
      android:focusable="true"
      android:focusableInTouchMode="true"
      android:layout_centerInParent="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/forgot_pin"
+        android:textColor="@color/select_text_color"
+        android:textSize="16sp"
+        android:layout_marginTop="40dp"
+        android:layout_below="@id/pin"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/tv_forgot_pin"/>
 </RelativeLayout>

@@ -32,30 +32,53 @@ class MainActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        selectedLayout = binding.llHome
+//        selectedLayout = binding.llHome
         loadFragment(HomeFragment())
+binding.bottomNavigation.setOnItemSelectedListener {item->
+    when(item.itemId){
+        R.id.item_home->{
+            loadFragment(HomeFragment())
+            true
+        }
+        R.id.item_docs->{
+            loadFragment(DocsFragment())
+            true
+        }
+        R.id.item_tools->{
+            loadFragment(ToolsFragment())
+            true
+        }
+        R.id.item_settings->{
+            loadFragment(SettingsFragment())
+            true
+        }
+        else->{
+            false
+        }
+    }
 
-        binding.llHome.setOnClickListener {
-            handleLinearLayoutClick(binding.llHome, HomeFragment())
-        }
-        binding.llDocs.setOnClickListener {
-            handleLinearLayoutClick(
-                binding.llDocs,
-                DocsFragment()
-            )
-        }
-        binding.llTools.setOnClickListener {
-            handleLinearLayoutClick(
-                binding.llTools,
-                ToolsFragment()
-            )
-        }
-        binding.llSettings.setOnClickListener {
-            handleLinearLayoutClick(
-                binding.llSettings,
-                SettingsFragment()
-            )
-        }
+}
+//        binding.llHome.setOnClickListener {
+//            handleLinearLayoutClick(binding.llHome, HomeFragment())
+//        }
+//        binding.llDocs.setOnClickListener {
+//            handleLinearLayoutClick(
+//                binding.llDocs,
+//                DocsFragment()
+//            )
+//        }
+//        binding.llTools.setOnClickListener {
+//            handleLinearLayoutClick(
+//                binding.llTools,
+//                ToolsFragment()
+//            )
+//        }
+//        binding.llSettings.setOnClickListener {
+//            handleLinearLayoutClick(
+//                binding.llSettings,
+//                SettingsFragment()
+//            )
+//        }
 
 
         //HANDLING PERMISSIONS FOR FILE READ AND WRITE
@@ -169,7 +192,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun hideBottomNavigationView() {
-        binding.bottomNavLinearlayout.visibility = View.GONE
+        binding.bottomNavigation.visibility = View.GONE
     }
     fun hideTopBar(){
         binding.llTopbar.visibility=View.GONE

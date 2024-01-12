@@ -14,7 +14,6 @@ import androidx.fragment.app.FragmentActivity
 import com.example.terascantest.R
 import com.example.terascantest.dialogs.DeleteDialog
 import com.example.terascantest.dialogs.MoveFileBottomSheetDialog
-import com.example.terascantest.dialogs.PasswordDialog
 import com.example.terascantest.dialogs.RenameDialog
 import com.example.terascantest.interfaces.BottomSheetCallBack
 import com.example.terascantest.model.ToolsItemsModel

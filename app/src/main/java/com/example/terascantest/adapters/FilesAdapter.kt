@@ -40,14 +40,14 @@ val bottomSheet= BottomSheetDialog(item.fileUri)
         }
 
         holder.itemView.setOnClickListener {
-            if(!retrieveIsLocked("islocked${item.fileUri}")){
+            if(!Utils.retrieveIsLocked(context,"islocked${item.fileUri}")){
                 val intent=Intent(context,FileViewActivity::class.java)
                 intent.putExtra("fileUri",item.fileUri.toString())
                 context.startActivity(intent)
             }
             else{
                 Toast.makeText(context,"File is locked",Toast.LENGTH_SHORT).show()
-                Utils.loadFragment(context as FragmentActivity,EnterPinFragment())
+                Utils.loadFragment(context as FragmentActivity,EnterPinFragment(item.fileUri.toString()))
             }
 
         }
@@ -89,8 +89,5 @@ val bottomSheet= BottomSheetDialog(item.fileUri)
         }
     }
 
-    fun retrieveIsLocked(key: String): Boolean {
-        val sharedPreferences = context.getSharedPreferences("MY_PREFS", Context.MODE_PRIVATE)
-        return sharedPreferences.getBoolean(key, false)
-    }
+
 }

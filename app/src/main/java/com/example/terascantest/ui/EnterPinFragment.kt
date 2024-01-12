@@ -1,6 +1,7 @@
 package com.example.terascantest.ui
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.content.res.Resources
 import android.os.Bundle
 import android.text.Editable
@@ -15,9 +16,10 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.terascantest.R
 import com.example.terascantest.databinding.FragmentEnterPinBinding
+import com.example.terascantest.utils.Utils
 
 
-class EnterPinFragment : Fragment() {
+class EnterPinFragment(val fileUri:String) : Fragment() {
     private lateinit var binding: FragmentEnterPinBinding
     private val editTextArray: ArrayList<EditText> = ArrayList(4)
     private lateinit var numTemp:String
@@ -34,6 +36,7 @@ class EnterPinFragment : Fragment() {
 
 
 binding.pin.addTextChangedListener(object :TextWatcher{
+
     override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
 
     }
@@ -43,9 +46,20 @@ binding.pin.addTextChangedListener(object :TextWatcher{
     }
 
     override fun afterTextChanged(s: Editable?) {
+        var fileRename = s.toString()
         if (s != null) {
             if(s.length==4){
-                Toast.makeText(context,s.toString(),Toast.LENGTH_SHORT).show()
+                if(fileRename.equals(context?.let { Utils.retrievePasswordValue(it,"password") })){
+                    binding.tvIncorrectPin.visibility=View.GONE
+                    startActivity(Intent(context, FileViewActivity::class.java))
+                }
+                else{
+binding.tvIncorrectPin.visibility=View.VISIBLE
+                  fileRename= null.toString()
+                    binding.pin.text=null
+                }
+                Toast.makeText(context,fileUri,Toast.LENGTH_SHORT).show()
+
             }
         }
     }

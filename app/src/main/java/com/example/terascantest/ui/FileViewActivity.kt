@@ -2,6 +2,7 @@ package com.example.terascantest.ui
 
 import android.annotation.SuppressLint
 import android.app.Dialog
+import android.content.Intent
 import android.opengl.Visibility
 import android.os.Bundle
 import android.text.Editable
@@ -26,9 +27,10 @@ private lateinit var binding:ActivityFileViewBinding
         setContentView(binding.root)
         val intent=intent
        val fileUri= intent.getStringExtra("fileUri").toString()
+binding.ivBack.setOnClickListener { startActivity(Intent(applicationContext,MainActivity::class.java)) }
 
         val dialog = Dialog(this)
-        Toast.makeText(applicationContext,fileUri,Toast.LENGTH_SHORT).show()
+
 
         binding.icLock.setOnClickListener{
             dialog.setContentView(R.layout.layout_password_dialog);
@@ -51,9 +53,7 @@ private lateinit var binding:ActivityFileViewBinding
                         textViewOk.setTextColor(ContextCompat.getColor(applicationContext, R.color.select_text_color))
 
                         textViewOk.setOnClickListener {
-//                       Utils.loadFragment(this@FileViewActivity,SecurityQuestionsFragment())
-                            storeValIsLocked("islocked$fileUri",true)
-
+                       Utils.loadFragment(this@FileViewActivity,SecurityQuestionsFragment(fileUri,fileRename))
                             dialog.dismiss()
                         }
                     }
@@ -70,11 +70,5 @@ private lateinit var binding:ActivityFileViewBinding
         binding.rlTopbar.visibility=View.GONE
     }
 
-    @SuppressLint("CommitPrefEdits")
-    fun storeValIsLocked(key:String,value:Boolean){
-        val sharedPreferences = getSharedPreferences("MY_PREFS", MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
-        editor.putBoolean(key,value)
-        editor.apply()
-    }
+
 }
