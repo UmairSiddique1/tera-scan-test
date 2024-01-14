@@ -22,7 +22,7 @@ import com.example.terascantest.R
 import com.example.terascantest.databinding.ActivityMainBinding
 import com.example.terascantest.dialogs.PermissionDialog
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(){
     private lateinit var binding: ActivityMainBinding
     private lateinit var selectedLayout: LinearLayout
     private val STORAGE_PERMISSION_REQUEST_CODE = 1
@@ -32,8 +32,9 @@ class MainActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-//        selectedLayout = binding.llHome
+
         loadFragment(HomeFragment())
+
 binding.bottomNavigation.setOnItemSelectedListener {item->
     when(item.itemId){
         R.id.item_home->{
@@ -58,27 +59,6 @@ binding.bottomNavigation.setOnItemSelectedListener {item->
     }
 
 }
-//        binding.llHome.setOnClickListener {
-//            handleLinearLayoutClick(binding.llHome, HomeFragment())
-//        }
-//        binding.llDocs.setOnClickListener {
-//            handleLinearLayoutClick(
-//                binding.llDocs,
-//                DocsFragment()
-//            )
-//        }
-//        binding.llTools.setOnClickListener {
-//            handleLinearLayoutClick(
-//                binding.llTools,
-//                ToolsFragment()
-//            )
-//        }
-//        binding.llSettings.setOnClickListener {
-//            handleLinearLayoutClick(
-//                binding.llSettings,
-//                SettingsFragment()
-//            )
-//        }
 
 
         //HANDLING PERMISSIONS FOR FILE READ AND WRITE
@@ -117,58 +97,13 @@ binding.bottomNavigation.setOnItemSelectedListener {item->
 
     }
 
-    private fun handleLinearLayoutClick(linearLayout: LinearLayout, fragment: Fragment) {
-        if (linearLayout != selectedLayout) {
-            updatePreviousLayout(selectedLayout)
-            updateSelectedLayout(linearLayout)
-            loadFragment(fragment)
-        }
-    }
-
-    private fun updatePreviousLayout(linearLayout: LinearLayout) {
-        // Reset the color and icon of the previous selected linear layout // Set your unselected background resource
-        val icon = linearLayout.getChildAt(0) as ImageView
-        val text = linearLayout.getChildAt(1) as TextView
-        icon.setColorFilter(
-            ContextCompat.getColor(
-                this,
-                R.color.bottom_nav_unselected_color
-            )
-        ) // Set your unselected icon color
-        text.setTextColor(
-            ContextCompat.getColor(
-                this,
-                R.color.bottom_nav_unselected_color
-            )
-        ) // Set your unselected text color
-    }
-
-    private fun updateSelectedLayout(linearLayout: LinearLayout) {
-        // Set the color and icon for the newly selected linear layout
-        // Set your selected background resource
-        val icon = linearLayout.getChildAt(0) as ImageView
-        val text = linearLayout.getChildAt(1) as TextView
-        icon.setColorFilter(
-            ContextCompat.getColor(
-                this,
-                R.color.bottom_nav_selected_color
-            )
-        ) // Set your selected icon color
-        text.setTextColor(
-            ContextCompat.getColor(
-                this,
-                R.color.bottom_nav_selected_color
-            )
-        ) // Set your selected text color
-
-        // Update the selectedLayout to the current linear layout
-        selectedLayout = linearLayout
-    }
-
     private fun loadFragment(fragment: Fragment) {
         val fragmentManager: FragmentManager = supportFragmentManager
         val transaction: FragmentTransaction = fragmentManager.beginTransaction()
+        if (fragment is ViewAllFragment) {
+            // Pass the callback to the fragment
 
+        }
         // Replace the current fragment with the new one
         transaction.replace(R.id.fragmentContainer, fragment)
         // Commit the transaction
@@ -191,10 +126,8 @@ binding.bottomNavigation.setOnItemSelectedListener {item->
         }
     }
 
-    fun hideBottomNavigationView() {
+    fun hideNavigation() {
         binding.bottomNavigation.visibility = View.GONE
-    }
-    fun hideTopBar(){
         binding.llTopbar.visibility=View.GONE
     }
 }

@@ -13,7 +13,6 @@ import com.example.terascantest.model.ToolsItemsModel
 
 class ToolsAdapter(val context: Context, private val list:List<ToolsItemsModel>) :
     RecyclerView.Adapter<ToolsAdapter.ViewHolder>() {
-
     /**
      * Provide a reference to the type of views that you are using
      * (custom ViewHolder)
@@ -30,7 +29,6 @@ class ToolsAdapter(val context: Context, private val list:List<ToolsItemsModel>)
             tvPremium=view.findViewById(R.id.tv_premium)
         }
     }
-
     // Create new views (invoked by the layout manager)
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
         // Create a new view, which defines the UI of the list item
@@ -56,8 +54,6 @@ class ToolsAdapter(val context: Context, private val list:List<ToolsItemsModel>)
         }
 
     }
-
     // Return the size of your dataset (invoked by the layout manager)
     override fun getItemCount() = list.size
-
 }

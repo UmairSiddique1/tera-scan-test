@@ -13,21 +13,20 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.SearchView
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.terascantest.R
 import com.example.terascantest.adapters.FilesAdapter
 import com.example.terascantest.databinding.FragmentViewAllBinding
+import com.example.terascantest.interfaces.BottomSheetCallBack
 import com.example.terascantest.model.FilesDataModel
-import com.example.terascantest.utils.FetchFilesUtils
 import com.example.terascantest.viewmodels.FilesViewModel
 
 
-class ViewAllFragment : Fragment() {
+class ViewAllFragment : Fragment(){
     private lateinit var binding: FragmentViewAllBinding
     private lateinit var filesViewModel: FilesViewModel
-
+    private var callBack: BottomSheetCallBack? =null
     @RequiresApi(Build.VERSION_CODES.Q)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -40,9 +39,10 @@ class ViewAllFragment : Fragment() {
         }
         filesViewModel = ViewModelProvider(this)[FilesViewModel::class.java]
 
+        callBack?.dismissBottomSheet()
         //HIDING THE BOTTOM NAVIGATION
         val activity = activity as? MainActivity
-        activity?.hideBottomNavigationView()
+        activity?.hideNavigation()
 
         binding.rvViewAll.layoutManager = LinearLayoutManager(context)
         var list: MutableList<FilesDataModel> = ArrayList()

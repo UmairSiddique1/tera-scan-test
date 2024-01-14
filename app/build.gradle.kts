@@ -51,5 +51,6 @@ dependencies {
 
     implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
     implementation ("io.github.chaosleung:pinview:1.4.4")
+    implementation ("androidx.multidex:multidex:2.0.1")
 
 }

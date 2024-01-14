@@ -19,7 +19,6 @@ import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
-import androidx.documentfile.provider.DocumentFile
 import com.example.terascantest.R
 import com.example.terascantest.adapters.BottomSheetAdapter
 import com.example.terascantest.interfaces.BottomSheetCallBack
@@ -34,38 +33,51 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-class MoveFileBottomSheetDialog(private val fileUri: Uri): BottomSheetDialogFragment(),BottomSheetCallBack {
+class MoveFileBottomSheetDialog(private val fileUri: Uri) : BottomSheetDialogFragment(),
+    BottomSheetCallBack {
     private lateinit var adapter: BottomSheetAdapter
+    private lateinit var filePath: String
 
     @RequiresApi(Build.VERSION_CODES.R)
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         val view = inflater.inflate(R.layout.layout_bottomsheet, container, false)
-        val tvTitle=view.findViewById<TextView>(R.id.tv_bottomsheet_title)
-        val listView=view.findViewById<ListView>(R.id.listview)
+        val tvTitle = view.findViewById<TextView>(R.id.tv_bottomsheet_title)
+        val listView = view.findViewById<ListView>(R.id.listview)
         tvTitle.setText(R.string.move_to)
 
         val dataList = generateDataList()
-        listView.setOnItemClickListener { _, _, position, _ ->
-          if(dataList[position].name=="Create new folder"){
-              context?.let { createNewFolderDialog(it) }
-          }
-            else{
-              val directory = File(dataList[position].path!!)
-
-              if (directory.exists() && directory.isDirectory) {
-
-                  moveFile(uriToFile(requireContext(),fileUri)!!,directory)
-              }
-          }
-        }
 
         adapter = context?.let { BottomSheetAdapter(it, dataList.toMutableList(), fileUri, this) }!!
-        listView.adapter=adapter
+        listView.adapter = adapter
         return view
     }
 
     override fun dismissBottomSheet() {
-      dismiss()
+        dismiss()
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    override fun onItemClick(s: String) {
+        if (s == "Create new folder") {
+            context?.let { createNewFolderDialog(it) }
+        } else {
+            val directoryPath =
+                getExternalStorageDirectory().absolutePath + "/com.example.terascan/"
+            val foldersInDirectory = listFoldersInDirectory(directoryPath)
+            for (folders in foldersInDirectory.indices) {
+                if (s == foldersInDirectory[folders].name) {
+                    val directory = File(foldersInDirectory[folders].absolutePath)
+
+                    if (directory.exists() && directory.isDirectory) {
+                        moveFile(uriToFile(requireContext(), fileUri)!!, directory)
+                    }
+                }
+            }
+        }
     }
 
     // CREATE NEW FOLDER DIALOG
@@ -73,9 +85,10 @@ class MoveFileBottomSheetDialog(private val fileUri: Uri): BottomSheetDialogFrag
     fun createNewFolderDialog(context: Context) {
         val builder = AlertDialog.Builder(context)
         val viewGroup = (context as Activity).findViewById<ViewGroup>(android.R.id.content)
-        val dialogView = LayoutInflater.from(context).inflate(R.layout.layout_rename_dialog, viewGroup, false)
+        val dialogView =
+            LayoutInflater.from(context).inflate(R.layout.layout_rename_dialog, viewGroup, false)
 
-        val tvTitle=dialogView.findViewById<TextView>(R.id.tv_title_bottomsheet)
+        val tvTitle = dialogView.findViewById<TextView>(R.id.tv_title_bottomsheet)
         val et_rename = dialogView.findViewById<EditText>(R.id.et_rename_file)
         val tv_rename = dialogView.findViewById<TextView>(R.id.tv_rename)
         val tv_cancel = dialogView.findViewById<TextView>(R.id.tv_cancel)
@@ -98,11 +111,18 @@ class MoveFileBottomSheetDialog(private val fileUri: Uri): BottomSheetDialogFrag
                     tv_rename.setTextColor(
                         ContextCompat.getColor(
                             context,
-                            R.color.default_text_color
-                        ))
+                            R.color.secondary_title_color
+                        )
+                    )
                 } else {
                     // Set the default text color when EditText is not empty
-                    tv_rename.setTextColor(ContextCompat.getColor(context, R.color.select_text_color)) }
+                    tv_rename.setTextColor(
+                        ContextCompat.getColor(
+                            context,
+                            R.color.select_text_color
+                        )
+                    )
+                }
 
                 tv_rename.setOnClickListener {
 
@@ -111,34 +131,30 @@ class MoveFileBottomSheetDialog(private val fileUri: Uri): BottomSheetDialogFrag
                 }
             }
         })
-
-
         tv_cancel.setOnClickListener {
             alertDialog.dismiss()
         }
         alertDialog.show()
     }
 
-
-
-
     // METHOD THAT RETURN DATA LIST
     @SuppressLint("SdCardPath")
     private fun generateDataList(): List<ToolsItemsModel> {
-
-
         val dataList = mutableListOf<ToolsItemsModel>()
-
         // Add "Create new folder" as the first item
         dataList.add(ToolsItemsModel("Create new folder", R.drawable.ic_new_folder))
         val directoryPath = getExternalStorageDirectory().absolutePath + "/com.example.terascan/"
         val foldersInDirectory = listFoldersInDirectory(directoryPath)
         // Add the folder names and paths to the list
-
-        for(folders in foldersInDirectory.indices){
-            dataList.add(ToolsItemsModel(foldersInDirectory[folders].name,R.drawable.ic_new_folder,foldersInDirectory[folders].absolutePath))
+        for (folders in foldersInDirectory.indices) {
+            dataList.add(
+                ToolsItemsModel(
+                    foldersInDirectory[folders].name,
+                    R.drawable.ic_new_folder,
+                    foldersInDirectory[folders].absolutePath
+                )
+            )
         }
-
         return dataList
     }
 
@@ -150,13 +166,13 @@ class MoveFileBottomSheetDialog(private val fileUri: Uri): BottomSheetDialogFrag
         }
         try {
             // Append timestamp to the file name to ensure uniqueness
-            val timestamp = SimpleDateFormat("yyyyMMdd_HHmmssSSS", Locale.getDefault()).format(Date())
+            val timestamp =
+                SimpleDateFormat("yyyyMMdd_HHmmssSSS", Locale.getDefault()).format(Date())
             val destinationFileName = "${timestamp}_${src.name}"
 
             // Copy to destination folder with the unique file name
             val destinationPath = dest.toPath().resolve(destinationFileName)
             Files.copy(src.toPath(), destinationPath, StandardCopyOption.REPLACE_EXISTING)
-
             // Delete the source file
             Files.delete(src.toPath())
 
@@ -168,13 +184,7 @@ class MoveFileBottomSheetDialog(private val fileUri: Uri): BottomSheetDialogFrag
         }
     }
 
-
-
-
-
-
-
-    fun uriToFile(context: Context, uri: Uri): File? {
+    private fun uriToFile(context: Context, uri: Uri): File? {
         var inputStream: java.io.InputStream? = null
         var fileOutputStream: FileOutputStream? = null
 
@@ -196,13 +206,12 @@ class MoveFileBottomSheetDialog(private val fileUri: Uri): BottomSheetDialogFrag
 
         return null
     }
-    fun createFolder(fileName:String) {
+
+    fun createFolder(fileName: String) {
         // Get the external storage directory for your app
         val externalStorageDir = getExternalStorageDirectory()
-
         // Specify the name of the folder you want to create
         val folderName = "com.example.terascan/$fileName/"
-
         // Create a File object representing the new folder
         val folder = File(externalStorageDir, folderName)
 
@@ -222,22 +231,19 @@ class MoveFileBottomSheetDialog(private val fileUri: Uri): BottomSheetDialogFrag
         }
     }
 
-    fun listFoldersInDirectory(directoryPath: String): List<File> {
+    private fun listFoldersInDirectory(directoryPath: String): List<File> {
         val directory = File(directoryPath)
-
         // Check if the specified directory exists
-        if (directory.exists() && directory.isDirectory) {
+        return if (directory.exists() && directory.isDirectory) {
             // List all files and directories in the specified directory
             val filesAndDirectories = directory.listFiles()
-
             // Filter only directories
             val folders = filesAndDirectories?.filter { it.isDirectory }
-
             // Return list of directories
-            return folders ?: emptyList()
+            folders ?: emptyList()
         } else {
             println("Directory does not exist: $directoryPath")
-            return emptyList()
+            emptyList()
         }
     }
 }

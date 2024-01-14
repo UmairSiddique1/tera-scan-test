@@ -53,7 +53,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp"
             android:fontFamily="@font/roboto_regular"
-            android:textColor="#A6A6A6"/>
+            android:textColor="@color/secondary_title_color"/>
     </LinearLayout>
 </LinearLayout>
 </androidx.cardview.widget.CardView>

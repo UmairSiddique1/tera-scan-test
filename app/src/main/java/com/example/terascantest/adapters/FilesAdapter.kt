@@ -46,7 +46,7 @@ val bottomSheet= BottomSheetDialog(item.fileUri)
                 context.startActivity(intent)
             }
             else{
-                Toast.makeText(context,"File is locked",Toast.LENGTH_SHORT).show()
+
                 Utils.loadFragment(context as FragmentActivity,EnterPinFragment(item.fileUri.toString()))
             }
 

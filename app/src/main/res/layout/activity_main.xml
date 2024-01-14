@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/app_name"
-            android:textColor="#0D0D0D"
+            android:textColor="@color/title_color"
             android:textSize="22sp"
             android:fontFamily="@font/roboto_bold"
             android:textStyle="bold"/>
@@ -61,120 +61,16 @@
         android:layout_marginTop="18dp"
         android:layout_marginBottom="0dp" />
 
-<!--    <LinearLayout-->
-<!--        android:id="@+id/bottom_nav_linearlayout"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_alignParentBottom="true">-->
-
-<!--        <LinearLayout-->
-<!--            android:id="@+id/ll_home"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_gravity="center"-->
-<!--            android:layout_weight="1"-->
-<!--            android:gravity="center"-->
-<!--            android:orientation="vertical">-->
-
-<!--            <ImageView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:src="@drawable/home" />-->
-
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:fontFamily="@font/roboto_regular"-->
-<!--                android:text="@string/home"-->
-<!--                android:textColor="#858585"-->
-<!--                android:textSize="12sp" />-->
-<!--        </LinearLayout>-->
-
-<!--        <LinearLayout-->
-<!--            android:id="@+id/ll_docs"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_gravity="center"-->
-<!--            android:layout_weight="1"-->
-<!--            android:gravity="center"-->
-<!--            android:orientation="vertical">-->
-
-<!--            <ImageView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:src="@drawable/folder" />-->
-
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:fontFamily="@font/roboto_regular"-->
-<!--                android:text="@string/docs"-->
-<!--                android:textColor="#858585"-->
-<!--                android:textSize="12sp" />-->
-<!--        </LinearLayout>-->
-
-<!--        <ImageView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_gravity="center"-->
-<!--            android:layout_margin="5dp"-->
-<!--            android:background="@drawable/bg_addbtn"-->
-<!--            android:padding="10dp"-->
-<!--            android:src="@drawable/ic_addicon" />-->
-
-<!--        <LinearLayout-->
-<!--            android:id="@+id/ll_tools"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_gravity="center"-->
-<!--            android:layout_weight="1"-->
-<!--            android:gravity="center"-->
-<!--            android:orientation="vertical">-->
-
-<!--            <ImageView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:src="@drawable/category" />-->
-
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:fontFamily="@font/roboto_regular"-->
-<!--                android:text="@string/tools"-->
-<!--                android:textColor="#858585"-->
-<!--                android:textSize="12sp" />-->
-<!--        </LinearLayout>-->
-
-<!--        <LinearLayout-->
-<!--            android:id="@+id/ll_settings"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_gravity="center"-->
-<!--            android:layout_weight="1"-->
-<!--            android:gravity="center"-->
-<!--            android:orientation="vertical">-->
-
-<!--            <ImageView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:src="@drawable/setting" />-->
-
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:fontFamily="@font/roboto_regular"-->
-<!--                android:text="@string/settings"-->
-<!--                android:textColor="#858585"-->
-<!--                android:textSize="12sp" />-->
-<!--        </LinearLayout>-->
-<!--    </LinearLayout>-->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@color/white"
+        android:background="@color/transparent"
+        style="@style/Widget.App.BottomNavigationView"
         app:labelVisibilityMode="labeled"
+        app:itemTextColor="@color/bottom_nav_item"
+        app:itemIconTint="@color/bottom_nav_item"
         app:menu="@menu/menu"/>
 </RelativeLayout>
 

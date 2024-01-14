@@ -52,7 +52,7 @@ binding.icDone.setOnClickListener {
     if(answer.isNotEmpty()){
         Utils.storeValIsLocked(requireContext(), "islocked$fileUri", true)
         Utils.storePasswordValue(requireContext(), "password", fileRename)
-        Utils.storeQuestionValue(requireContext(), "ans$position$fileUri", answer)
+        Utils.storeQuestionValue(requireContext(), "ans$position", answer)
         Toast.makeText(context,answer,Toast.LENGTH_SHORT).show()
         Log.d("ans",answer)
     }

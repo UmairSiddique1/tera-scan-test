@@ -5,6 +5,7 @@
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
         <item name="android:statusBarColor">@android:color/white</item>
         <item name="android:windowLightStatusBar">true</item>
+        <item name="bottomNavigationStyle">@style/Widget.App.BottomNavigationView</item>
     </style>
 
     <style name="Theme.TerascanTest" parent="Base.Theme.TerascanTest" >
@@ -12,18 +13,13 @@
         <item name="android:windowLightStatusBar">true</item>
     </style>
 
-    <style name="OnSelectBottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView.Colored">
-        <!-- Customize other attributes if needed -->
-<!--        <item name="itemIconTint">#A36DFF</item>-->
-<!--        <item name="itemTextColor">#A36DFF</item>-->
-        <!-- Add other custom attributes as needed -->
+    <style name="Widget.App.BottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView.Colored">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.BottomNavigationView</item>
     </style>
 
-    <style name="UnSelectBottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView.Colored">
-        <!-- Customize other attributes if needed -->
-        <item name="itemIconTint">#858585</item>
-        <item name="itemTextColor">#858585</item>
-        <!-- Add other custom attributes as needed -->
+    <style name="ThemeOverlay.App.BottomNavigationView" parent="">
+        <item name="colorPrimary">@color/bottom_nav_selected_color</item>
+        <item name="colorOnPrimary">@color/bottom_nav_unselected_color</item>
     </style>
 
     <style name="PinEditText" parent="Widget.AppCompat.EditText">
