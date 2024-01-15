@@ -1,35 +1,35 @@
 package com.example.terascantest.ui
 
 import android.Manifest
-import android.content.Intent
 import android.content.pm.PackageManager
-import android.net.Uri
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Environment
-import android.provider.Settings
 import android.view.View
-import android.widget.ImageView
 import android.widget.LinearLayout
-import android.widget.TextView
+import android.widget.Toast
+import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.ViewModelProvider
 import com.example.terascantest.R
 import com.example.terascantest.databinding.ActivityMainBinding
-import com.example.terascantest.dialogs.PermissionDialog
+import com.example.terascantest.viewmodels.FilesViewModel
+
 
 class MainActivity : AppCompatActivity(){
     private lateinit var binding: ActivityMainBinding
     private lateinit var selectedLayout: LinearLayout
     private val STORAGE_PERMISSION_REQUEST_CODE = 1
+    private lateinit var filesViewModel: FilesViewModel
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityMainBinding.inflate(layoutInflater)
-
+        filesViewModel = ViewModelProvider(this)[FilesViewModel::class.java]
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
@@ -85,16 +85,6 @@ binding.bottomNavigation.setOnItemSelectedListener {item->
         }
 
 
-        //REQUEST PERMISSIONS FOR ANDROID 11 AND ABOVE
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && !Environment.isExternalStorageManager()) {
-            PermissionDialog.permissionDialog(this, onAllowAction = {
-                val intent = Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION)
-                val uri = Uri.fromParts("package", packageName, null)
-                intent.setData(uri)
-                startActivity(intent)
-            })
-        }
-
     }
 
     private fun loadFragment(fragment: Fragment) {
@@ -110,6 +100,7 @@ binding.bottomNavigation.setOnItemSelectedListener {item->
         transaction.commit()
     }
 
+    @RequiresApi(Build.VERSION_CODES.Q)
     override fun onRequestPermissionsResult(
         requestCode: Int, permissions: Array<String?>,
         grantResults: IntArray
@@ -120,6 +111,8 @@ binding.bottomNavigation.setOnItemSelectedListener {item->
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 // Permission granted, perform your read operation
                 // ...
+                Toast.makeText(applicationContext,"permission granted",Toast.LENGTH_SHORT).show()
+                filesViewModel.fetchFiles(this)
             } else {
                 // Permission denied, handle accordingly (e.g., show a message to the user)
             }

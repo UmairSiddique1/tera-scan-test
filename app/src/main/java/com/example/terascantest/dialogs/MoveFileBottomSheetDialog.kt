@@ -45,6 +45,7 @@ class MoveFileBottomSheetDialog(private val fileUri: Uri) : BottomSheetDialogFra
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.layout_bottomsheet, container, false)
+        createFolder("Favourites")
         val tvTitle = view.findViewById<TextView>(R.id.tv_bottomsheet_title)
         val listView = view.findViewById<ListView>(R.id.listview)
         tvTitle.setText(R.string.move_to)
@@ -65,8 +66,7 @@ class MoveFileBottomSheetDialog(private val fileUri: Uri) : BottomSheetDialogFra
         if (s == "Create new folder") {
             context?.let { createNewFolderDialog(it) }
         } else {
-            val directoryPath =
-                getExternalStorageDirectory().absolutePath + "/com.example.terascan/"
+            val directoryPath = getExternalStorageDirectory().absolutePath + "/com.example.terascan/"
             val foldersInDirectory = listFoldersInDirectory(directoryPath)
             for (folders in foldersInDirectory.indices) {
                 if (s == foldersInDirectory[folders].name) {

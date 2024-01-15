@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginRight="16dp"
     android:layout_marginLeft="16dp"
     tools:context=".ui.HomeFragment">
@@ -13,47 +14,63 @@
         android:id="@+id/rv_tools"
       />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/rl_1"
-            android:layout_marginTop="24dp"
-            android:layout_below="@id/rv_tools">
+<!--        <RelativeLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:id="@+id/rl_1"-->
+<!--            android:layout_marginTop="24dp"-->
+<!--            android:layout_below="@id/rv_tools">-->
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:layout_centerVertical="true"
-                android:layout_alignParentStart="true"
-                android:text="@string/recent_files"
-                android:textColor="@color/title_color"
-                android:fontFamily="@font/roboto_bold"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/tv_view_all"
-                android:text="@string/view_all"
-                android:layout_centerVertical="true"
-                android:textColor="#BF9AFE"
-                android:textSize="12sp"
-                android:layout_alignParentEnd="true"
-                />
-        </RelativeLayout>
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:textSize="16sp"-->
+<!--                android:layout_centerVertical="true"-->
+<!--                android:layout_alignParentStart="true"-->
+<!--                android:text="@string/recent_files"-->
+<!--                android:textColor="@color/title_color"-->
+<!--                android:fontFamily="@font/roboto_bold"/>-->
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:id="@+id/tv_view_all"-->
+<!--                android:text="@string/view_all"-->
+<!--                android:layout_centerVertical="true"-->
+<!--                android:textColor="#BF9AFE"-->
+<!--                android:textSize="12sp"-->
+<!--                android:layout_alignParentEnd="true"-->
+<!--                />-->
+<!--        </RelativeLayout>-->
 
-    <androidx.recyclerview.widget.RecyclerView
+<!--    <androidx.recyclerview.widget.RecyclerView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:visibility="gone"-->
+<!--        android:layout_marginTop="16dp"-->
+<!--        android:id="@+id/rv_files"-->
+<!--        android:layout_below="@+id/rl_1"/>-->
+
+ <com.google.android.material.tabs.TabLayout
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:layout_marginTop="24dp"
+     app:tabTextColor="@color/black"
+     app:tabSelectedTextColor="@color/select_text_color"
+     app:tabIndicatorFullWidth="true"
+     android:background="@color/white"
+     android:layout_below="@id/rv_tools"
+     android:id="@+id/tabLayout"/>
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone"
+        android:layout_below="@+id/tabLayout"
         android:layout_marginTop="16dp"
-        android:id="@+id/rv_files"
-        android:layout_below="@+id/rl_1"/>
-
-
+        android:id="@+id/frameLayout"/>
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/rl_1"
+        android:visibility="gone"
+        android:layout_below="@id/frameLayout"
         android:id="@+id/nestedSV">
 
 
@@ -61,7 +78,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginTop="150dp"
+android:layout_marginTop="100dp"
         android:id="@+id/ll_documentscan">
         <ImageView
             android:layout_width="wrap_content"
@@ -90,4 +107,12 @@
             android:layout_gravity="center"/>
     </LinearLayout>
     </androidx.core.widget.NestedScrollView>
+    <ImageView
+        android:layout_width="52dp"
+        android:layout_height="52dp"
+        android:src="@drawable/ic_dialog"
+        android:id="@+id/iv_dialog"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="16dp"/>
 </RelativeLayout>

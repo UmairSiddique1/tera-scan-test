@@ -30,12 +30,15 @@
     <string name="create_name">Create Pin</string>
     <string name="pin_desc">One pin for all files. The pin is used within the app to lock and export file. Set pin in the shared and save screen.</string>
     <string name="set_security_questions">Set Security Questions</string>
-<string name="incorrect_pin">Incorrect Pin. Retry!</string>
+    <string name="incorrect_pin">Incorrect Pin. Retry!</string>
     <string name="enter_pin">Enter Pin</string>
     <string name="question_fav_color">What is your Favourite color?</string>
     <string name="question_pet_name">"What's your pet name?"</string>
     <string name="question_lucky_number">"What's your lucky number?"</string>
     <string name="answer">Answer</string>
     <string name="security_question_description">If you forgot the pin the security question will be used to verify identify so that you can reset the password</string>
-<string name="forgot_pin">Forgot Pin?</string>
+    <string name="forgot_pin">Forgot Pin?</string>
+    <string name="camera">Camera</string>
+    <string name="gallery">Gallery</string>
+    <string name="no_data">No Data!</string>
 </resources>
