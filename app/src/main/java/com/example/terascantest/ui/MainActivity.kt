@@ -2,52 +2,78 @@ package com.example.terascantest.ui
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.content.Context
 import android.content.pm.PackageManager
-import android.graphics.PixelFormat
 import android.os.Build
 import android.os.Bundle
 import android.view.View
-import android.view.WindowManager
+import android.view.animation.Animation
+import android.view.animation.RotateAnimation
 import android.widget.FrameLayout
-import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
 import com.example.terascantest.R
 import com.example.terascantest.databinding.ActivityMainBinding
-import com.example.terascantest.interfaces.BackgroundOpacityCallback
 import com.example.terascantest.utils.Utils
 import com.example.terascantest.viewmodels.FilesViewModel
 
 
-class MainActivity : AppCompatActivity(), BackgroundOpacityCallback {
+class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    private lateinit var selectedLayout: LinearLayout
     private val STORAGE_PERMISSION_REQUEST_CODE = 1
     private lateinit var filesViewModel: FilesViewModel
-    private lateinit var overlayFrameLayout: FrameLayout
-
+    private var isIconClicked = false
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityMainBinding.inflate(layoutInflater)
         filesViewModel = ViewModelProvider(this)[FilesViewModel::class.java]
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        loadFragment(HomeFragment(this))
+        loadFragment(HomeFragment())
+        binding.ivDialog.setOnClickListener {
+            if (!isIconClicked) {
+                binding.framelayout2.background =
+                    ContextCompat.getDrawable(applicationContext, R.color.opacity)
+                binding.ivDialog.startAnimation(rotateAnimation(0f, 45f, 200))
+                binding.llAddItems.visibility = View.VISIBLE
+            } else {
+                binding.framelayout2.background =
+                    ContextCompat.getDrawable(applicationContext, R.color.transparent)
+                binding.ivDialog.startAnimation(rotateAnimation(45f, 0f, 200))
+                binding.llAddItems.visibility = View.GONE
+            }
+            isIconClicked = !isIconClicked
+        }
+        binding.llGallery.setOnClickListener {
+            binding.framelayout2.background =
+                ContextCompat.getDrawable(applicationContext, R.color.transparent)
+            binding.ivDialog.startAnimation(rotateAnimation(45f, 0f, 200))
+            binding.llAddItems.visibility = View.GONE
+            isIconClicked = !isIconClicked
+
+        }
+        binding.llCamera.setOnClickListener {
+            binding.framelayout2.background =
+                ContextCompat.getDrawable(applicationContext, R.color.transparent)
+            binding.ivDialog.startAnimation(rotateAnimation(45f, 0f, 200))
+            binding.llAddItems.visibility = View.GONE
+            isIconClicked = !isIconClicked
+
+        }
         binding.ivSearch.setOnClickListener {
             Utils.loadFragment(this, ViewAllFragment())
         }
         binding.bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.item_home -> {
-                    loadFragment(HomeFragment(this))
+                    loadFragment(HomeFragment())
                     true
                 }
 
@@ -133,14 +159,26 @@ class MainActivity : AppCompatActivity(), BackgroundOpacityCallback {
     }
 
     @SuppressLint("MissingInflatedId")
-    override fun onDisplay() {
 
 
+    private fun rotateAnimation(
+        fromDegree: Float,
+        toDegree: Float,
+        duration: Long
+    ): RotateAnimation {
+        val pivotX = binding.ivDialog.width / 2.0f
+        val pivotY = binding.ivDialog.height / 2.0f
+
+        val rotateAnimation = RotateAnimation(
+            fromDegree,
+            toDegree,
+            RotateAnimation.RELATIVE_TO_SELF,
+            pivotX / binding.ivDialog.width,  // pivotX as a fraction of the view's width
+            RotateAnimation.RELATIVE_TO_SELF,
+            pivotY / binding.ivDialog.height   // pivotY as a fraction of the view's height
+        )
+        rotateAnimation.duration = duration
+        rotateAnimation.fillAfter = true
+        return rotateAnimation
     }
-
-    override fun onDismiss() {
-
-    }
-
-
 }

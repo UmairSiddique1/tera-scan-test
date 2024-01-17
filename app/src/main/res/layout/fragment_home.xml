@@ -32,7 +32,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="16dp" />
 
-        <androidx.core.widget.NestedScrollView
+        <ScrollView
             android:id="@+id/nestedSV"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -73,90 +73,10 @@
                     android:layout_marginBottom="100dp"
                     android:src="@drawable/ic_downarrow" />
             </LinearLayout>
-        </androidx.core.widget.NestedScrollView>
+        </ScrollView>
     </LinearLayout>
 
 
-    <FrameLayout
-        android:id="@+id/framelayout2"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/opacity"
-        android:visibility="gone"
-        android:layout_gravity="bottom|right">
 
-        <LinearLayout
-            android:id="@+id/rl_add_dialog"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|right"
-            android:orientation="vertical"
-            android:paddingBottom="80dp">
-
-            <LinearLayout
-                android:id="@+id/ll_camera"
-                android:layout_width="wrap_content"
-                android:layout_height="36dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="64dp"
-                    android:layout_height="24dp"
-                    android:layout_marginEnd="24dp"
-                    android:fontFamily="@font/roboto_medium"
-                    android:text="@string/camera"
-                    android:textColor="@color/white"
-                    android:textSize="18sp" />
-
-                <ImageView
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:background="@drawable/bg_dialog_add_icon"
-                    android:padding="6dp"
-                    android:src="@drawable/ic_camera"
-                    app:tint="@color/select_text_color" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/ll_gallery"
-                android:layout_width="wrap_content"
-                android:layout_height="36dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="64dp"
-                    android:layout_height="24dp"
-
-                    android:layout_marginEnd="24dp"
-                    android:fontFamily="@font/roboto_medium"
-                    android:gravity="start"
-                    android:text="@string/gallery"
-                    android:textColor="@color/white"
-                    android:textSize="18sp" />
-
-                <ImageView
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:background="@drawable/bg_dialog_add_icon"
-                    android:padding="6dp"
-                    android:src="@drawable/ic_gallery"
-                    app:tint="@color/select_text_color" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <ImageView
-            android:id="@+id/iv_dialog"
-            android:layout_width="52dp"
-            android:layout_height="52dp"
-            android:layout_gravity="bottom|right"
-            android:layout_marginBottom="16dp"
-            android:background="@drawable/bg_add"
-            android:padding="10dp"
-            android:src="@drawable/ic_addicon" />
-    </FrameLayout>
 
 </FrameLayout>
