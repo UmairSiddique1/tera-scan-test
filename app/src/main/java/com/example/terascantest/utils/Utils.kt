@@ -25,6 +25,7 @@ object Utils {
             // Handle the case where the activity is null (optional, based on your requirements)
         }
     }
+
     fun retrieveIsLocked(context: Context,key: String): Boolean {
         val sharedPreferences = context.getSharedPreferences("MY_PREFS", Context.MODE_PRIVATE)
         return sharedPreferences.getBoolean(key, false)
@@ -59,6 +60,16 @@ object Utils {
     fun retrieveQuestionValue(context: Context,key:String):String{
         val sharedPreferences = context.getSharedPreferences("QUESTION_PREF", AppCompatActivity.MODE_PRIVATE)
         return sharedPreferences.getString(key,"").toString()
+    }
+    fun storeQuestionPosition(context: Context,key: String,value:Int){
+        val sharedPreferences = context.getSharedPreferences("POSITION_PREF", AppCompatActivity.MODE_PRIVATE)
+        val editor=sharedPreferences.edit()
+        editor.putInt(key,value)
+        editor.apply()
+    }
+    fun retrieveQuestionPosition(context: Context,key:String):Int{
+        val sharedPreferences = context.getSharedPreferences("POSITION_PREF", AppCompatActivity.MODE_PRIVATE)
+        return sharedPreferences.getInt(key,0)
     }
 
 }

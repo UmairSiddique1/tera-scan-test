@@ -1,4 +1,4 @@
-package com.example.terascantest.dialogs
+package com.example.terascantest.ui.dialogs
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -23,7 +23,7 @@ import java.io.File
 object RenameDeleteDialog{
     @SuppressLint("MissingInflatedId")
     fun renameDialog(context: Context, fileUri: Uri) {
-        val builder = AlertDialog.Builder(context)
+        val builder = AlertDialog.Builder(context,R.style.CustomDialog)
         val viewGroup = (context as Activity).findViewById<ViewGroup>(android.R.id.content)
         val dialogView = LayoutInflater.from(context).inflate(R.layout.layout_rename_dialog, viewGroup, false)
 
@@ -73,7 +73,7 @@ object RenameDeleteDialog{
 
     @SuppressLint("MissingInflatedId")
     fun deleteDialog(context: Context, fileUri: Uri) {
-        val builder = AlertDialog.Builder(context)
+        val builder = AlertDialog.Builder(context,R.style.CustomDialog)
         val viewGroup = (context as Activity).findViewById<ViewGroup>(android.R.id.content)
         val dialogView = LayoutInflater.from(context)
             .inflate(R.layout.layout_permission_dialog, viewGroup, false)

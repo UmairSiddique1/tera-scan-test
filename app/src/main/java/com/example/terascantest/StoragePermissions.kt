@@ -12,10 +12,11 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import com.example.terascantest.dialogs.HomeDialogs
+import com.example.terascantest.interfaces.DialogDismissListenerCallBack
+import com.example.terascantest.ui.dialogs.PermissionAndAddDialog
 
 
-class StoragePermissions(private val fragment: Fragment) {
+class StoragePermissions(private val fragment: Fragment, private val callBack:DialogDismissListenerCallBack) {
 
     private lateinit var storageActivityResultLauncher: ActivityResultLauncher<Intent>
 
@@ -25,9 +26,7 @@ class StoragePermissions(private val fragment: Fragment) {
 
     private fun initializeActivityResultLauncher() {
         storageActivityResultLauncher =
-            fragment.registerForActivityResult(
-                ActivityResultContracts.StartActivityForResult()
-            ) { result ->
+            fragment.registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
                 handleStoragePermissionResult(result.resultCode)
             }
     }
@@ -35,27 +34,30 @@ class StoragePermissions(private val fragment: Fragment) {
     private fun handleStoragePermissionResult(resultCode: Int) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && Environment.isExternalStorageManager()) {
             // Storage permission granted
-            showToast("Storage permission granted.")
+            showToast("Storage ppppermission granted.")
+            callBack.onShow()
         } else {
             // Storage permission denied
             showToast("Storage permission denied.")
+            callBack.onDialogDismissed()
+
         }
     }
 
     fun requestStoragePermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             if (!Environment.isExternalStorageManager()) {
-                HomeDialogs.permissionDialog(fragment.requireActivity(), onAllowAction = {
+                PermissionAndAddDialog.permissionDialog(fragment.requireActivity(), onAllowAction = {
                     // Request the permission using the new approach for Android 11 and above
                     val intent = Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION)
                     val uri = Uri.fromParts("package", fragment.requireActivity().packageName, null)
                     intent.data = uri
                     storageActivityResultLauncher.launch(intent)
                 })
-
             } else {
                 // Storage permission already granted for Android 11 and above
                 showToast("Storage permission already granted.")
+                callBack.onShow()
             }
         } else {
             // Request the permission using the old approach for Android versions below 11

@@ -1,4 +1,4 @@
-package com.example.terascantest.dialogs
+package com.example.terascantest.ui.dialogs
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -7,6 +7,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment.getExternalStorageDirectory
+import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
@@ -36,7 +37,6 @@ import java.util.Locale
 class MoveFileBottomSheetDialog(private val fileUri: Uri) : BottomSheetDialogFragment(),
     BottomSheetCallBack {
     private lateinit var adapter: BottomSheetAdapter
-    private lateinit var filePath: String
 
     @RequiresApi(Build.VERSION_CODES.R)
     override fun onCreateView(
@@ -166,9 +166,8 @@ class MoveFileBottomSheetDialog(private val fileUri: Uri) : BottomSheetDialogFra
         }
         try {
             // Append timestamp to the file name to ensure uniqueness
-            val timestamp =
-                SimpleDateFormat("yyyyMMdd_HHmmssSSS", Locale.getDefault()).format(Date())
-            val destinationFileName = "${timestamp}_${src.name}"
+            val timestamp = SimpleDateFormat("yyyyMMdd_HHmmssSSS", Locale.getDefault()).format(Date())
+            val destinationFileName = src.name
 
             // Copy to destination folder with the unique file name
             val destinationPath = dest.toPath().resolve(destinationFileName)
@@ -183,29 +182,30 @@ class MoveFileBottomSheetDialog(private val fileUri: Uri) : BottomSheetDialogFra
             Log.d("movefile", "Unable to move file: " + e.message.toString())
         }
     }
-
     private fun uriToFile(context: Context, uri: Uri): File? {
-        var inputStream: java.io.InputStream? = null
-        var fileOutputStream: FileOutputStream? = null
-
         try {
-            val contentResolver = context.contentResolver
-
-            inputStream = contentResolver.openInputStream(uri)
-            val outputFile = File(context.cacheDir, "tempFile")
-            fileOutputStream = FileOutputStream(outputFile)
-
-            inputStream?.copyTo(fileOutputStream)
-            return outputFile
-        } catch (e: IOException) {
+            val filePath: String? = getRealPathFromURI(context, uri)
+            if (filePath != null) {
+                return File(filePath)
+            }
+        } catch (e: Exception) {
             e.printStackTrace()
-        } finally {
-            inputStream?.close()
-            fileOutputStream?.close()
         }
 
         return null
     }
+
+    private fun getRealPathFromURI(context: Context, uri: Uri): String? {
+        val contentResolver = context.contentResolver
+        val cursor = contentResolver.query(uri, null, null, null, null)
+
+        return cursor?.use {
+            val columnIndex = it.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
+            it.moveToFirst()
+            it.getString(columnIndex)
+        }
+    }
+
 
     fun createFolder(fileName: String) {
         // Get the external storage directory for your app

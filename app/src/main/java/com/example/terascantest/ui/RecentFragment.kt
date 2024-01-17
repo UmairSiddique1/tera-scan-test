@@ -12,9 +12,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.terascantest.R
 import com.example.terascantest.adapters.FilesAdapter
 import com.example.terascantest.databinding.FragmentRecentBinding
+import com.example.terascantest.interfaces.DialogDismissListenerCallBack
 import com.example.terascantest.viewmodels.FilesViewModel
 
-class RecentFragment : Fragment() {
+class RecentFragment() : Fragment() {
     private lateinit var binding: FragmentRecentBinding
     private lateinit var filesViewModel: FilesViewModel
 
@@ -25,6 +26,7 @@ class RecentFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentRecentBinding.inflate(inflater, container, false)
+
         filesViewModel = ViewModelProvider(requireActivity())[FilesViewModel::class.java]
         binding.rvRecent.layoutManager = LinearLayoutManager(context)
         val filesAdapter = context?.let { FilesAdapter(it, emptyList(), "limit") }
@@ -41,10 +43,11 @@ class RecentFragment : Fragment() {
                 binding.rvRecent.visibility=View.GONE
             }
             filesAdapter?.updateList(newFileList)
+            filesAdapter?.notifyDataSetChanged()
         }
 
         context?.let { filesViewModel.fetchFiles(it) }
-        filesAdapter?.notifyDataSetChanged()
+
         return binding.root
     }
 

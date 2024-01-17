@@ -1,4 +1,4 @@
-package com.example.terascantest.dialogs
+package com.example.terascantest.ui.dialogs
 
 import android.annotation.SuppressLint
 import android.content.Context

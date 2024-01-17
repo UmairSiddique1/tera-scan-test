@@ -1,10 +1,15 @@
 package com.example.terascantest.ui
 
 import android.Manifest
+import android.annotation.SuppressLint
+import android.content.Context
 import android.content.pm.PackageManager
+import android.graphics.PixelFormat
 import android.os.Build
 import android.os.Bundle
 import android.view.View
+import android.view.WindowManager
+import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.annotation.RequiresApi
@@ -17,15 +22,17 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
 import com.example.terascantest.R
 import com.example.terascantest.databinding.ActivityMainBinding
+import com.example.terascantest.interfaces.BackgroundOpacityCallback
+import com.example.terascantest.utils.Utils
 import com.example.terascantest.viewmodels.FilesViewModel
 
 
-class MainActivity : AppCompatActivity(){
+class MainActivity : AppCompatActivity(), BackgroundOpacityCallback {
     private lateinit var binding: ActivityMainBinding
     private lateinit var selectedLayout: LinearLayout
     private val STORAGE_PERMISSION_REQUEST_CODE = 1
     private lateinit var filesViewModel: FilesViewModel
-
+    private lateinit var overlayFrameLayout: FrameLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -33,32 +40,38 @@ class MainActivity : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        loadFragment(HomeFragment())
+        loadFragment(HomeFragment(this))
+        binding.ivSearch.setOnClickListener {
+            Utils.loadFragment(this, ViewAllFragment())
+        }
+        binding.bottomNavigation.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.item_home -> {
+                    loadFragment(HomeFragment(this))
+                    true
+                }
 
-binding.bottomNavigation.setOnItemSelectedListener {item->
-    when(item.itemId){
-        R.id.item_home->{
-            loadFragment(HomeFragment())
-            true
-        }
-        R.id.item_docs->{
-            loadFragment(DocsFragment())
-            true
-        }
-        R.id.item_tools->{
-            loadFragment(ToolsFragment())
-            true
-        }
-        R.id.item_settings->{
-            loadFragment(SettingsFragment())
-            true
-        }
-        else->{
-            false
-        }
-    }
+                R.id.item_docs -> {
+                    loadFragment(DocsFragment())
+                    true
+                }
 
-}
+                R.id.item_tools -> {
+                    loadFragment(ToolsFragment())
+                    true
+                }
+
+                R.id.item_settings -> {
+                    loadFragment(SettingsFragment())
+                    true
+                }
+
+                else -> {
+                    false
+                }
+            }
+
+        }
 
 
         //HANDLING PERMISSIONS FOR FILE READ AND WRITE
@@ -83,17 +96,12 @@ binding.bottomNavigation.setOnItemSelectedListener {item->
                 STORAGE_PERMISSION_REQUEST_CODE
             )
         }
-
-
     }
 
     private fun loadFragment(fragment: Fragment) {
         val fragmentManager: FragmentManager = supportFragmentManager
         val transaction: FragmentTransaction = fragmentManager.beginTransaction()
-        if (fragment is ViewAllFragment) {
-            // Pass the callback to the fragment
 
-        }
         // Replace the current fragment with the new one
         transaction.replace(R.id.fragmentContainer, fragment)
         // Commit the transaction
@@ -111,7 +119,7 @@ binding.bottomNavigation.setOnItemSelectedListener {item->
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 // Permission granted, perform your read operation
                 // ...
-                Toast.makeText(applicationContext,"permission granted",Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext, "permission granted", Toast.LENGTH_SHORT).show()
                 filesViewModel.fetchFiles(this)
             } else {
                 // Permission denied, handle accordingly (e.g., show a message to the user)
@@ -121,6 +129,18 @@ binding.bottomNavigation.setOnItemSelectedListener {item->
 
     fun hideNavigation() {
         binding.bottomNavigation.visibility = View.GONE
-        binding.llTopbar.visibility=View.GONE
+        binding.llTopbar.visibility = View.GONE
     }
+
+    @SuppressLint("MissingInflatedId")
+    override fun onDisplay() {
+
+
+    }
+
+    override fun onDismiss() {
+
+    }
+
+
 }

@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import com.example.terascantest.databinding.FragmentEnterPinBinding
 import com.example.terascantest.utils.Utils
@@ -20,7 +21,14 @@ class EnterPinFragment(val fileUri: String) : Fragment() {
         binding = FragmentEnterPinBinding.inflate(inflater, container, false)
         val activity = activity as MainActivity
         activity.hideNavigation()
-
+        binding.tvForgotPin.setOnClickListener {
+            Utils.loadFragment(requireActivity(),SecurityQuestionsFragment(fileUri,""))
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                startActivity(Intent(context,MainActivity::class.java))
+            }
+        })
         binding.pin.addTextChangedListener(object : TextWatcher {
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {

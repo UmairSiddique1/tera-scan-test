@@ -12,7 +12,7 @@ import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.terascantest.R
-import com.example.terascantest.dialogs.BottomSheetDialog
+import com.example.terascantest.ui.dialogs.BottomSheetDialog
 import com.example.terascantest.model.FilesDataModel
 import com.example.terascantest.ui.EnterPinFragment
 import com.example.terascantest.ui.FileViewActivity

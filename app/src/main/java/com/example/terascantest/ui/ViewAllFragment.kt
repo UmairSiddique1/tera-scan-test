@@ -11,6 +11,8 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.ViewModelProvider
@@ -23,10 +25,11 @@ import com.example.terascantest.model.FilesDataModel
 import com.example.terascantest.viewmodels.FilesViewModel
 
 
-class ViewAllFragment : Fragment(){
+class ViewAllFragment : Fragment() {
     private lateinit var binding: FragmentViewAllBinding
     private lateinit var filesViewModel: FilesViewModel
-    private var callBack: BottomSheetCallBack? =null
+    private var callBack: BottomSheetCallBack? = null
+
     @RequiresApi(Build.VERSION_CODES.Q)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -34,9 +37,15 @@ class ViewAllFragment : Fragment(){
         // Inflate the layout for this fragment
         binding = FragmentViewAllBinding.inflate(inflater, container, false)
         binding.icBackArrow.setOnClickListener {
-            context?.startActivity(Intent(context, MainActivity::class.java)
+            context?.startActivity(
+                Intent(context, MainActivity::class.java)
             )
         }
+        requireActivity().onBackPressedDispatcher.addCallback(object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                startActivity(Intent(context, MainActivity::class.java))
+            }
+        })
         filesViewModel = ViewModelProvider(this)[FilesViewModel::class.java]
 
         callBack?.dismissBottomSheet()

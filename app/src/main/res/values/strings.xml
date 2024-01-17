@@ -41,4 +41,7 @@
     <string name="camera">Camera</string>
     <string name="gallery">Gallery</string>
     <string name="no_data">No Data!</string>
+    <string name="create_new_pin">Create New Pin</string>
+    <string name="enter_new_pin">Enter New Pin</string>
+    <string name="confirm_new_pin">Confirm New Pin</string>
 </resources>

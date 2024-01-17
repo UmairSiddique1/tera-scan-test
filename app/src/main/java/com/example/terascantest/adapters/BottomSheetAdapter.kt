@@ -12,8 +12,8 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.FragmentActivity
 import com.example.terascantest.R
-import com.example.terascantest.dialogs.MoveFileBottomSheetDialog
-import com.example.terascantest.dialogs.RenameDeleteDialog
+import com.example.terascantest.ui.dialogs.MoveFileBottomSheetDialog
+import com.example.terascantest.ui.dialogs.RenameDeleteDialog
 import com.example.terascantest.interfaces.BottomSheetCallBack
 import com.example.terascantest.model.ToolsItemsModel
 

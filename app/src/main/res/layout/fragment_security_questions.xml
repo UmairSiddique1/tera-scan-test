@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginStart="16dp"
     android:layout_marginEnd="16dp"
     tools:context=".ui.SecurityQuestionsFragment">
@@ -22,6 +23,7 @@
             android:layout_height="wrap_content"
             android:text="@string/set_security_questions"
             android:layout_centerVertical="true"
+            android:textColor="@color/title_color"
             android:layout_marginStart="32dp"
             android:fontFamily="@font/roboto_bold" />
         <ImageView
@@ -33,17 +35,20 @@
             android:layout_alignParentEnd="true"/>
     </RelativeLayout>
 
-<androidx.appcompat.widget.AppCompatSpinner
+<Spinner
     android:layout_width="match_parent"
     android:layout_height="24dp"
     android:id="@+id/spinner"
-    android:background="@color/white"
     android:layout_below="@id/rl_topbar"
-    android:layout_marginTop="32dp" />
+    android:popupBackground="@color/white"
+    android:layout_marginTop="32dp"
+    android:textColor="@color/black"
+    android:overlapAnchor="false"/>
 <EditText
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/et_edittext"
+    android:textColor="@color/title_color"
     android:layout_below="@id/spinner"
     android:layout_marginTop="18dp"
     android:hint="@string/answer"

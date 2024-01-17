@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/parent_framelayout"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_centerInParent="true"
-    android:layout_centerVertical="true"
-    android:background="@color/white"
+android:layout_gravity="top"
+android:background="@color/white"
     tools:context=".ui.MainActivity">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -30,24 +31,25 @@
 
         <!-- Icons on the Right -->
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:src="@drawable/ic_scan"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"/>
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:src="@drawable/ic_crown"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"/>
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:src="@drawable/ic_search"
             android:layout_marginStart="16dp"
+            android:id="@+id/iv_search"
             />
     </LinearLayout>
 
@@ -56,21 +58,22 @@
         android:id="@+id/fragmentContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_gravity="center"
         android:layout_above="@id/bottom_navigation"
         android:layout_below="@id/ll_topbar"
-        android:layout_marginTop="18dp"
-        android:layout_marginBottom="0dp" />
+        android:layout_marginTop="64dp"
+        android:layout_marginBottom="64dp" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="64dp"
-        android:layout_alignParentBottom="true"
+android:layout_gravity="bottom"
         android:background="@color/transparent"
         style="@style/Widget.App.BottomNavigationView"
         app:labelVisibilityMode="labeled"
         app:itemTextColor="@color/bottom_nav_item"
         app:itemIconTint="@color/bottom_nav_item"
         app:menu="@menu/menu"/>
-</RelativeLayout>
+</FrameLayout>
 
